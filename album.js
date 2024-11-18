@@ -12,18 +12,38 @@ titre3.style.color = 'yellow';
 let like_off = document.getElementById('like_off');
 let like_on = document.getElementById('like_on');
 
+// Amélioration de la gestion des likes avec stockage local
 function like_switch_on(element) {
     element.src = "icons/like_on.png";
-    element.onclick = function () { like_switch_off(element); };
-  }
-  
-  function like_switch_off(element) {
-    element.src = "icons/like_off.png";
-    element.onclick = function () { like_switch_on(element); };
-  }
-  
+    element.classList.remove('like_off');
+    element.classList.add('like_on');
+    element.onclick = () => like_switch_off(element);
+    
+    // Sauvegarder l'état du like
+    const imgPath = element.previousElementSibling.href;
+    localStorage.setItem(imgPath, 'liked');
+}
 
+function like_switch_off(element) {
+    element.src = "icons/like_off.png";
+    element.classList.remove('like_on');
+    element.classList.add('like_off');
+    element.onclick = () => like_switch_on(element);
+    
+    // Supprimer l'état du like
+    const imgPath = element.previousElementSibling.href;
+    localStorage.removeItem(imgPath);
+}
+
+// Restaurer l'état des likes au chargement
 document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.like_off').forEach(likeBtn => {
+        const imgPath = likeBtn.previousElementSibling.href;
+        if (localStorage.getItem(imgPath) === 'liked') {
+            like_switch_on(likeBtn);
+        }
+    });
+    
     const titreAlbum = document.querySelectorAll("main h2");
 
     titreAlbum.forEach(title => {
@@ -40,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Ajouter une couche de tuiles OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
-        attribution: '© OpenStreetMap'
+        attribution: '© OSM' // Attribution réduite
     }).addTo(map);
 
     // Ajouter des marqueurs pour chaque photo avec des coordonnées réalistes
@@ -120,4 +140,21 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+// Ajout d'un filtre pour afficher uniquement les images likées
+function showOnlyLiked() {
+    document.querySelectorAll('.bloc').forEach(bloc => {
+        const likeBtn = bloc.querySelector('.like_on');
+        bloc.style.display = likeBtn ? 'block' : 'none';
+    });
+}
+
+// Ajout d'un compteur de likes
+function updateLikeCounter() {
+    const likeCount = document.querySelectorAll('.like_on').length;
+    const counter = document.createElement('div');
+    counter.id = 'likeCounter';
+    counter.textContent = `Total des likes : ${likeCount}`;
+    document.querySelector('main').prepend(counter);
+}
 

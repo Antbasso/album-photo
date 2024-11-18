@@ -135,8 +135,7 @@ h2 {
 }
 
 #carte {
-    height: 400px;
-    width: 100%;
-    margin-top: 50px;
+    height: 300px; /* Réduction de la hauteur de 400px à 300px */
+    width: 80%; /* Réduction de la largeur à 80% */
+    margin: 30px auto; /* Centrage horizontal et espacement vertical */
 }
-
