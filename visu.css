@@ -1,0 +1,142 @@
+/* Style pour le conteneur principal de la page */
+body {
+    display: flex; /* Utilisation de flexbox pour placer le menu à gauche */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style pour le menu sur la gauche */
+.entete {
+    flex: 0 0 200px; /* Utilisation de flex pour la largeur du menu, 200px minimum */
+    background-color: #f0f0f0; /* Couleur de fond du menu */
+    padding: 12px;
+    position: fixed; /* Fixe le menu à gauche de la page */
+    top: 0;
+    left: 0;
+    height: 100%; /* Hauteur égale à la hauteur de la fenêtre */
+}
+
+/* Ajuster le flux principal à droite du menu */
+main {
+    margin-left: 180px; /* Ajouter un espace à gauche pour le menu */
+    padding: 40px;
+    flex: 1; /* Permet au contenu principal de s'étendre */
+}
+
+/* Style pour le conteneur d'images */
+.COntainer1, .COntainer2, .COntainer3 {
+    display: flex; /* Utilisation de flexbox pour aligner les images */
+    flex-wrap: wrap; /* Permet aux images de passer à la ligne suivante si l'espace est insuffisant */
+    gap: 10px; /* Espacement entre les images */
+    transition: opacity 0.3s ease;
+}
+
+.Description {
+    position: absolute; /* Positionnement absolu par rapport à l'image */
+    top: 50%; /* Positionne au centre vertical */
+    left: 50%; /* Positionne au centre horizontal */
+    transform: translate(-50%, -50%); /* Ajuste la position pour centrer exactement */
+    background-color: rgba(0, 0, 0, 1); /* Fond semi-transparent noir */
+    color: white; /* Couleur du texte */
+    padding: 10px; /* Espace autour du texte */
+    border-radius: 5px; /* Coins arrondis pour la description */
+    opacity: 0; /* Cache la description par défaut */
+    transition: opacity 0.3s ease; /* Transition douce pour l'apparition */
+}
+
+.bloc {
+    position: relative; /* Nécessaire pour que la description se positionne par rapport à l'image */
+}
+
+.bloc:hover img {
+    opacity: 0.6; /* Assombrit l'image au survol */
+    transform: scale(1.09); /* Augmente légèrement la taille de l'image */
+}
+
+.bloc:hover .Description {
+    opacity: 1; /* Affiche la description au survol */
+}
+
+.like_on ,.like_off {
+opacity: 0;
+position: absolute; /* Positionnement absolu par rapport à l'image */
+top: 75%; /* Position vertical */
+left: 80%; /* Position horizontal */
+height: 30px;
+}
+
+.bloc:hover .like_off , .like.on {
+    opacity: 1;
+}
+
+/* Style pour les images */
+img, a {
+    height: 150px; /* Conserver le ratio d'aspect de l'image */
+    border-radius: 3.5px; /* Coins arrondis pour les images */
+    transition: transform 0.3s ease; /* Transition douce pour le changement de taille */
+    display: inline-block; /* Pour s'assurer que les liens ne prennent que la taille du contenu */
+}
+
+/* Style pour le titre de niveau 1 (h1) */
+.entete h1 {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+} 
+
+/* Style pour la liste des albums dans le menu */
+.entete ul {
+    list-style-type: none; /* Supprimer les puces */
+    padding: 0;
+}
+
+.entete ul li a{
+    font-size: 18px;
+    height: 20px;
+    color: #333;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.entete ul li:hover {
+    background-color: #ddd; /* Couleur de fond lors du survol */
+}
+
+h2 {
+    margin-top: 40px; /* Espace supplémentaire au-dessus des titres */
+}
+
+/* Style pour la flèche de retour en haut */
+#back-to-top {
+    position: fixed; /* Fixe la position de la flèche sur l'écran */
+    bottom: 20px; /* Distance du bas de la page */
+    right: 20px; /* Distance du côté droit de la page */
+    cursor: pointer;
+}
+
+#back-to-top img:hover {
+    opacity: 0.7; /* Réduit l'opacité au survol pour un effet visuel */
+}
+
+@keyframes blink {
+    0%, 100% {
+        border: 2px solid transparent;
+    }
+    50% {
+        border: 2px solid rgb(90, 99, 228); /* Couleur du bord clignotant */
+    }
+}
+
+.entete {
+    border: 2px solid transparent; /* Bordure initiale */
+    animation: blink 1s infinite; /* Applique l'animation */
+}
+
+#carte {
+    height: 400px;
+    width: 100%;
+    margin-top: 50px;
+}
+
